@@ -1,0 +1,1 @@
+/Users/loctra/Loctra/MyDevelop/MyProjects/Hashtags/hashtagsview/buildSrc/build/classes/kotlin/main/DependenciesKt.class:/Users/loctra/Loctra/MyDevelop/MyProjects/Hashtags/hashtagsview/buildSrc/build/classes/kotlin/main/ReleasesKt.class
