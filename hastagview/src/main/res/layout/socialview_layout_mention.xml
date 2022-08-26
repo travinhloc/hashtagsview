@@ -1,52 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    style="?android:attr/dropDownItemStyle"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/SelectableItemBackground"
     android:layout_width="match_parent"
-    android:layout_height="?android:attr/listPreferredItemHeight"
-    android:gravity="center_vertical"
-    android:orientation="horizontal">
+    android:layout_height="50dp">
 
-    <FrameLayout
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_marginStart="12dp"
-        android:layout_marginLeft="12dp">
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cardPhoto"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="16dp"
+        app:cardBackgroundColor="@color/elevation"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="2dp"
+        app:cardPreventCornerOverlap="false"
+        app:cardUseCompatPadding="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:strokeColor="@color/white"
+        app:strokeWidth="2dp">
 
-        <ImageView
-            android:id="@+id/socialview_mention_avatar"
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ivAvatar"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:contentDescription="@string/mention"
-            android:src="@drawable/socialview_ic_mention_placeholder" />
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_placeholder_nuddg" />
 
-        <ProgressBar
-            android:id="@+id/socialview_mention_loading"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:layout_gravity="center" />
-    </FrameLayout>
+    </com.google.android.material.card.MaterialCardView>
 
-    <LinearLayout
-        android:layout_width="match_parent"
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvUsername"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_marginStart="10dp"
+        android:fontFamily="@font/dmsans_medium"
+        android:textColor="@color/black"
+        android:textSize="13sp"
+        app:layout_constraintBottom_toTopOf="@id/tvFullName"
+        app:layout_constraintStart_toEndOf="@+id/cardPhoto"
+        app:layout_constraintTop_toTopOf="@+id/cardPhoto"
+        tools:text="@string/app_name" />
 
-        <TextView
-            android:id="@+id/socialview_mention_displayname"
-            style="?android:attr/dropDownItemStyle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ellipsize="marquee"
-            android:singleLine="true"
-            android:textAppearance="?textAppearanceLargePopupMenu" />
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvFullName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:fontFamily="@font/dmsans_regular"
+        android:textColor="@color/text_secondary"
+        android:textSize="11sp"
+        app:layout_constraintBottom_toBottomOf="@id/cardPhoto"
+        app:layout_constraintStart_toEndOf="@+id/cardPhoto"
+        app:layout_constraintTop_toBottomOf="@+id/tvUsername"
+        tools:text="@string/app_name" />
 
-        <TextView
-            android:id="@+id/socialview_mention_username"
-            style="?android:attr/dropDownItemStyle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ellipsize="marquee"
-            android:singleLine="true"
-            android:textAppearance="?textAppearanceSmallPopupMenu" />
-    </LinearLayout>
-</LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.75dp"
+        android:background="@color/elevation"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

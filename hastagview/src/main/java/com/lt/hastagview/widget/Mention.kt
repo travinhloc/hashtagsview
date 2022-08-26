@@ -7,25 +7,25 @@ class Mention @JvmOverloads constructor(
     /**
      * {@inheritDoc}
      */
-    override val username: CharSequence,
+    override val userName: CharSequence,
     /**
      * {@inheritDoc}
      */
-    override val displayname: CharSequence? = null,
+    override val displayName: CharSequence? = null,
     /**
      * {@inheritDoc}
      */
-    override val avatar: Any? = null
+    override val avatar: String? = ""
 ) : MentionAble {
     override fun equals(obj: Any?): Boolean {
-        return obj is Mention && obj.username === username
+        return obj is Mention && obj.userName === userName
     }
 
     override fun hashCode(): Int {
-        return username.hashCode()
+        return userName.hashCode()
     }
 
     override fun toString(): String {
-        return username.toString()
+        return userName.toString()
     }
 }

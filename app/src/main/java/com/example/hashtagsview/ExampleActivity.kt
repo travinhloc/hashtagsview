@@ -14,15 +14,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.recyclerview.widget.RecyclerView
 import com.lt.hastagview.widget.*
-
-//import com.lt.hastagview.widget.Hashtag
-//import com.lt.hastagview.widget.HashtagArrayAdapter
-//import com.lt.hastagview.widget.Mention
-//import com.lt.hastagview.widget.MentionArrayAdapter
-//import com.lt.hastagview.widget.SocialArrayAdapter
-
 class ExampleActivity : AppCompatActivity() {
-
     private companion object {
         const val HASHTAG1 = "follow"
         const val HASHTAG2 = "followme"
@@ -31,7 +23,7 @@ class ExampleActivity : AppCompatActivity() {
         const val HASHTAG3_COUNT = 500
         const val MENTION1_USERNAME = "dirtyhobo"
         const val MENTION2_USERNAME = "hobo"
-        const val MENTION3_USERNAME = "lock lock"
+        const val MENTION3_USERNAME = "lock_lock"
         const val MENTION2_DISPLAYNAME = "Regular Hobo"
         const val MENTION3_DISPLAYNAME = "Hendra Anggrian"
     }
@@ -81,9 +73,9 @@ class ExampleActivity : AppCompatActivity() {
             Person(MENTION2_USERNAME),
             Person(MENTION3_USERNAME)
         )
-
         textView.hashtagAdapter = defaultHashtagAdapter
         textView.mentionAdapter = defaultMentionAdapter
+
         textView.setHashtagTextChangedListener(object : SocialView.OnChangedListener {
             override fun onChanged(view: SocialView, text: CharSequence) {
                 Log.d("hashtag", text.toString())
@@ -129,9 +121,7 @@ class ExampleActivity : AppCompatActivity() {
 
     data class Person(val name: String)
 
-    class PersonAdapter(context: Context) :
-        SocialArrayAdapter<Person>(context, R.layout.item_person, R.id.textViewName) {
-
+    class PersonAdapter(context: Context) : SocialArrayAdapter<Person>(context, R.layout.item_person, R.id.textViewName) {
         override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
             val holder: PersonViewHolder
             var view = convertView
