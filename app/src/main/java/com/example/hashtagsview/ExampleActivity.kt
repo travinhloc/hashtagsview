@@ -25,7 +25,7 @@ class ExampleActivity : AppCompatActivity() {
     private companion object {
         const val HASHTAG1 = "follow"
         const val HASHTAG2 = "followme"
-        const val HASHTAG3 = "followmeorillkillyou"
+        const val HASHTAG3 = "followme kkk"
         const val HASHTAG2_COUNT = 1000
         const val HASHTAG3_COUNT = 500
         const val MENTION1_USERNAME = "dirtyhobo"

@@ -1,54 +1,36 @@
-package com.lt.hastagview.widget;
+package com.lt.hastagview.widget
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
+import com.lt.hastagview.widget.Hashtagable
+import com.lt.hastagview.widget.Hashtag
 
 /**
  * Simple optional hashtag data class, use when there is no custom hashtag class.
  */
-public class Hashtag implements Hashtagable {
-    private final CharSequence id;
-    private final int count;
-
-    public Hashtag(@NonNull CharSequence hashtag) {
-        this(hashtag, -1);
+class Hashtag @JvmOverloads constructor(private val id: CharSequence, private val count: Int = -1) :
+    Hashtagable {
+    override fun equals(obj: Any?): Boolean {
+        return obj is Hashtag && obj.id === id
     }
 
-    public Hashtag(@NonNull CharSequence hashtag, int count) {
-        this.id = hashtag;
-        this.count = count;
+    override fun hashCode(): Int {
+        return id.hashCode()
     }
 
-    @Override
-    public boolean equals(@Nullable Object obj) {
-        return obj instanceof Hashtag && ((Hashtag) obj).id == id;
-    }
-
-    @Override
-    public int hashCode() {
-        return id.hashCode();
-    }
-
-    @NonNull
-    @Override
-    public String toString() {
-        return id.toString();
+    override fun toString(): String {
+        return id.toString()
     }
 
     /**
      * {@inheritDoc}
      */
-    @NonNull
-    @Override
-    public CharSequence getId() {
-        return id;
+    override fun getId(): CharSequence {
+        return id
     }
 
     /**
      * {@inheritDoc}
      */
-    @Override
-    public int getCount() {
-        return count;
+    override fun getCount(): Int {
+        return count
     }
 }
