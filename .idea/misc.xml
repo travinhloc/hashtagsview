@@ -6,7 +6,9 @@
         <entry key="app/src/main/res/layout/activity_example.xml" value="0.16458333333333333" />
         <entry key="app/src/main/res/layout/item_person.xml" value="0.16458333333333333" />
         <entry key="hastagview/src/main/res/drawable/ic_hashtags.xml" value="0.2445" />
+        <entry key="hastagview/src/main/res/drawable/ic_placeholder_nuddg.xml" value="0.2445" />
         <entry key="hastagview/src/main/res/layout/socialview_layout_hashtag.xml" value="0.25" />
+        <entry key="hastagview/src/main/res/layout/socialview_layout_mention.xml" value="0.3307291666666667" />
         <entry key="socialview/res/layout/socialview_layout_mention.xml" value="0.3307291666666667" />
       </map>
     </option>
