@@ -31,8 +31,26 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
-}
 
+    sourceSets {
+        named("main") {
+            manifest.srcFile("AndroidManifest.xml")
+            java.srcDir("src")
+            res.srcDir("res")
+            resources.srcDir("src")
+        }
+        named("androidTest") {
+            setRoot("tests")
+            manifest.srcFile("tests/AndroidManifest.xml")
+            java.srcDir("tests/src")
+            res.srcDir("tests/res")
+            resources.srcDir("tests/src")
+        }
+    }
+    libraryVariants.all {
+        generateBuildConfigProvider.orNull?.enabled = false
+    }
+}
 dependencies {
 
     implementation("androidx.core:core-ktx:1.7.0")
@@ -43,4 +61,13 @@ dependencies {
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.3")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.4.0")
+}
+
+
+tasks {
+    val javadoc by registering(Javadoc::class) {
+        isFailOnError = false
+        source = android.sourceSets["main"].java.getSourceFiles()
+        classpath += project.files(android.bootClasspath.joinToString(File.pathSeparator))
+    }
 }
