@@ -3,7 +3,7 @@ package com.lt.hastagview.widget
 /**
  * Abstract mention to be used with [com.lt.hastagview.widget.MentionArrayAdapter].
  */
-interface Mentionable {
+interface MentionAble {
     /**
      * Unique id of this mention.
      */

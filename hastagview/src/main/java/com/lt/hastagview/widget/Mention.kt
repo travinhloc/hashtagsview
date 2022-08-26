@@ -1,8 +1,5 @@
 package com.lt.hastagview.widget
 
-import com.lt.hastagview.widget.Mentionable
-import com.lt.hastagview.widget.Mention
-
 /**
  * Simple optional mention data class, use when there is no custom mention class.
  */
@@ -19,7 +16,7 @@ class Mention @JvmOverloads constructor(
      * {@inheritDoc}
      */
     override val avatar: Any? = null
-) : Mentionable {
+) : MentionAble {
     override fun equals(obj: Any?): Boolean {
         return obj is Mention && obj.username === username
     }

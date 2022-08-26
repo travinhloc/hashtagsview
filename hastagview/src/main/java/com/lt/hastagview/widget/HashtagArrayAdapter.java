@@ -1,5 +1,7 @@
 package com.lt.hastagview.widget;
 
+import static com.lt.hastagview.widget.UtilsExtKt.setTextHashTagsPostsCount;
+
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,7 +28,7 @@ public class HashtagArrayAdapter<T extends HashtagAble> extends SocialArrayAdapt
     }
 
     public HashtagArrayAdapter(@NonNull Context context, @PluralsRes int countPluralRes) {
-        super(context, R.layout.socialview_layout_hashtag, R.id.socialview_hashtag);
+        super(context, R.layout.socialview_layout_hashtag, R.id.tvHashtag);
         this.countPluralRes = countPluralRes;
     }
 
@@ -45,14 +47,8 @@ public class HashtagArrayAdapter<T extends HashtagAble> extends SocialArrayAdapt
         final T item = getItem(position);
         if (item != null) {
             holder.hashtagView.setText(item.getId());
-
-            if (item.getCount() > 0) {
-                holder.countView.setVisibility(View.VISIBLE);
-                final int count = item.getCount();
-                holder.countView.setText(getContext().getResources().getQuantityString(countPluralRes, count, count));
-            } else {
-                holder.countView.setVisibility(View.GONE);
-            }
+            final int count = item.getCount();
+            setTextHashTagsPostsCount(holder.countView, count);
         }
         return convertView;
     }
@@ -62,8 +58,9 @@ public class HashtagArrayAdapter<T extends HashtagAble> extends SocialArrayAdapt
         private final TextView countView;
 
         ViewHolder(View itemView) {
-            hashtagView = itemView.findViewById(R.id.socialview_hashtag);
-            countView = itemView.findViewById(R.id.socialview_hashtag_count);
+            hashtagView = itemView.findViewById(R.id.tvHashtag);
+            countView = itemView.findViewById(R.id.postsCount);
         }
     }
+
 }

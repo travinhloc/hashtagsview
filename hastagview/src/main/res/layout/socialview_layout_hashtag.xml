@@ -1,27 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    style="?android:attr/dropDownItemStyle"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/SelectableItemBackground"
     android:layout_width="match_parent"
-    android:layout_height="?android:attr/listPreferredItemHeight"
-    android:gravity="center_vertical"
-    android:orientation="horizontal">
+    android:layout_height="50dp">
 
-    <TextView
-        android:id="@+id/socialview_hashtag"
-        style="?android:attr/dropDownItemStyle"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:ellipsize="marquee"
-        android:singleLine="true"
-        android:textAppearance="?textAppearanceLargePopupMenu" />
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/ivHashTags"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_marginStart="16dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/ic_hashtags"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/socialview_hashtag_count"
-        style="?android:attr/dropDownItemStyle"
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvHashtag"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:ellipsize="marquee"
-        android:singleLine="true"
-        android:textAppearance="?textAppearancePopupMenuHeader" />
-</LinearLayout>
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="16dp"
+        android:fontFamily="@font/dmsans_medium"
+        android:textSize="13sp"
+        app:layout_constraintStart_toEndOf="@+id/ivHashTags"
+        app:layout_constraintTop_toTopOf="@+id/ivHashTags"
+        tools:text="@string/app_name" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/postsCount"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:ellipsize="end"
+        android:fontFamily="@font/dmsans_regular"
+        android:maxLines="1"
+        android:textColor="@color/text_secondary"
+        android:textSize="10sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/tvHashtag"
+        app:layout_constraintTop_toBottomOf="@+id/tvHashtag"
+        tools:text="@string/app_name" />
+
+    <View
+        android:id="@+id/line"
+        android:layout_width="match_parent"
+        android:layout_height="0.75dp"
+        android:background="@color/elevation"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

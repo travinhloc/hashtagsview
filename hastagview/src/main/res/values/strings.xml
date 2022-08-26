@@ -1,4 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="mention">Mention</string>
+    <string name="app_name">Hasshtags</string>
+    <string name="one_post">1 post</string>
+    <string name="many_posts">%d posts</string>
+    <string name="thousand_posts">%dK posts</string>
+    <string name="million_posts">%dM posts</string>
 </resources>

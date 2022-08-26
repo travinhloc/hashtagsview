@@ -33,7 +33,7 @@ import java.io.File;
  * Note that this adapter is completely optional, any adapter extending
  * {@link android.widget.ArrayAdapter} can be attached to {@link SocialAutoCompleteTextView}.
  */
-public class MentionArrayAdapter<T extends Mentionable> extends SocialArrayAdapter<T> {
+public class MentionArrayAdapter<T extends MentionAble> extends SocialArrayAdapter<T> {
     private final int defaultAvatar;
 
     public MentionArrayAdapter(@NonNull Context context) {
