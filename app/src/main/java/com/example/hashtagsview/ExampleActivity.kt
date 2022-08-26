@@ -53,10 +53,7 @@ class ExampleActivity : AppCompatActivity() {
         defaultMentionAdapter.addAll(
             Mention(MENTION1_USERNAME),
             Mention(MENTION2_USERNAME, MENTION2_DISPLAYNAME),
-            Mention(
-                MENTION3_USERNAME,
-                MENTION3_DISPLAYNAME,
-                "https://avatars1.githubusercontent.com/u/11507430?s=460&v=4"
+            Mention(MENTION3_USERNAME, MENTION3_DISPLAYNAME, "https://avatars1.githubusercontent.com/u/11507430?s=460&v=4"
             )
         )
 
@@ -78,19 +75,29 @@ class ExampleActivity : AppCompatActivity() {
 
         textView.setHashtagTextChangedListener(object : SocialView.OnChangedListener {
             override fun onChanged(view: SocialView, text: CharSequence) {
-                Log.d("hashtag", text.toString())
+                Log.e("xxxhashtag", text.toString())
             }
         })
         textView.setMentionTextChangedListener(object : SocialView.OnChangedListener {
             override fun onChanged(view: SocialView, text: CharSequence) {
-                Log.d("mention", text.toString())
+                Log.e("xxx mention", text.toString())
             }
         })
         textView.setOnHyperlinkClickListener(object : SocialView.OnClickListener {
             override fun onClick(view: SocialView, text: CharSequence) {
-                Log.d("hyperlink", text.toString())
+                Log.e("xxx setOnHyperlink", text.toString())
             }
+        })
+        textView.setOnMentionClickListener(object : SocialView.OnClickListener {
+            override fun onClick(view: SocialView, text: CharSequence) {
+                Log.e("xxx setOnMention", text.toString())
+            }
+        })
 
+        textView.setOnHashtagClickListener(object : SocialView.OnClickListener {
+            override fun onClick(view: SocialView, text: CharSequence) {
+                Log.e("xxx setOnHashtag", text.toString())
+            }
         })
     }
 
