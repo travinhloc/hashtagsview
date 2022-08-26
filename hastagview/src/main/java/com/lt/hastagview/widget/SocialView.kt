@@ -1,248 +1,198 @@
-package com.lt.hastagview.widget;
+package com.lt.hastagview.widget
 
-import android.content.res.ColorStateList;
-import android.widget.TextView;
-
-import androidx.annotation.ColorInt;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.core.util.PatternsCompat;
-
-import java.util.List;
-import java.util.regex.Pattern;
+import android.content.res.ColorStateList
+import androidx.annotation.ColorInt
+import com.lt.hastagview.widget.SocialView.OnChangedListener
+import com.lt.hastagview.widget.SocialView
+import java.util.regex.Pattern
 
 /**
- * Base interface of all social widgets, which usually derived from {@link TextView}.
- * Out of the box, there are {@link SocialTextView}, {@link SocialEditText}, and {@code SocialAutoCompleteTextView}.
- * It can also be implemented in any {@link android.view.View}
- * using {@link SocialViewHelper}.
+ * Base interface of all social widgets, which usually derived from [TextView].
+ * Out of the box, there are [SocialTextView], [SocialEditText], and `SocialAutoCompleteTextView`.
+ * It can also be implemented in any [android.view.View]
+ * using [SocialViewHelper].
  */
-public interface SocialView {
-
+interface SocialView {
     /**
-     * Returns regex that are responsible for finding <b>hashtags</b>.
-     * By default, the pattern are {@code #(\w+)}.
+     * Returns regex that are responsible for finding **hashtags**.
+     * By default, the pattern are `#(\w+)`.
      */
-    @NonNull
-    Pattern getHashtagPattern();
-
     /**
-     * Returns regex that are responsible for finding <b>mentions</b>.
-     * By default, the pattern are {@code @(\w+)}.
-     */
-    @NonNull
-    Pattern getMentionPattern();
-
-    /**
-     * Returns regex that are responsible for finding <b>hyperlinks</b>.
-     * By default, the pattern are {@link PatternsCompat#WEB_URL}.
-     */
-    @NonNull
-    Pattern getHyperlinkPattern();
-
-    /**
-     * Modify regex that are responsible for finding <b>hashtags</b>.
+     * Modify regex that are responsible for finding **hashtags**.
      *
      * @param pattern custom regex. When null, default pattern will be used.
      */
-    void setHashtagPattern(@Nullable Pattern pattern);
-
+    var hashtagPattern: Pattern?
     /**
-     * Modify regex that are responsible for finding <b>hashtags</b>.
+     * Returns regex that are responsible for finding **mentions**.
+     * By default, the pattern are `@(\w+)`.
+     */
+    /**
+     * Modify regex that are responsible for finding **hashtags**.
      *
      * @param pattern custom regex. When null, default pattern will be used.
      */
-    void setMentionPattern(@Nullable Pattern pattern);
-
+    var mentionPattern: Pattern?
     /**
-     * Modify regex that are responsible for finding <b>hashtags</b>.
+     * Returns regex that are responsible for finding **hyperlinks**.
+     * By default, the pattern are [PatternsCompat.WEB_URL].
+     */
+    /**
+     * Modify regex that are responsible for finding **hashtags**.
      *
      * @param pattern custom regex. When null, default pattern will be used.
      */
-    void setHyperlinkPattern(@Nullable Pattern pattern);
-
+    var hyperlinkPattern: Pattern?
     /**
-     * Returns true if <b>hashtags</b> in this view are spanned.
+     * Returns true if **hashtags** in this view are spanned.
      */
-    boolean isHashtagEnabled();
-
     /**
-     * Returns true if <b>mentions</b> in this view are spanned.
-     */
-    boolean isMentionEnabled();
-
-    /**
-     * Returns true if <b>hyperlinks</b> in this view are spanned.
-     */
-    boolean isHyperlinkEnabled();
-
-    /**
-     * Determine whether this view should span <b>hashtags</b>.
+     * Determine whether this view should span **hashtags**.
      *
      * @param enabled True when spanning should be enabled.
      */
-    void setHashtagEnabled(boolean enabled);
-
+    var isHashtagEnabled: Boolean
     /**
-     * Determine whether this view should span <b>mentions</b>.
+     * Returns true if **mentions** in this view are spanned.
+     */
+    /**
+     * Determine whether this view should span **mentions**.
      *
      * @param enabled True when spanning should be enabled.
      */
-    void setMentionEnabled(boolean enabled);
-
+    var isMentionEnabled: Boolean
     /**
-     * Determine whether this view should span <b>hyperlinks</b>.
+     * Returns true if **hyperlinks** in this view are spanned.
+     */
+    /**
+     * Determine whether this view should span **hyperlinks**.
      *
      * @param enabled True when spanning should be enabled.
      */
-    void setHyperlinkEnabled(boolean enabled);
-
+    var isHyperlinkEnabled: Boolean
     /**
-     * Returns color instance of <b>hashtags</b>, default is color accent of current app theme.
-     * Will still return corresponding color even when {@link #isHashtagEnabled()} is false.
+     * Returns color instance of **hashtags**, default is color accent of current app theme.
+     * Will still return corresponding color even when [.isHashtagEnabled] is false.
      */
-    @NonNull
-    ColorStateList getHashtagColors();
-
     /**
-     * Returns color instance of <b>mentions</b>, default is color accent of current app theme.
-     * Will still return corresponding color even when {@link #isMentionEnabled()} ()} is false.
-     */
-    @NonNull
-    ColorStateList getMentionColors();
-
-    /**
-     * Returns color instance of <b>hyperlinks</b>, default is color accent of current app theme.
-     * Will still return corresponding color even when {@link #isHyperlinkEnabled()} ()} is false.
-     */
-    @NonNull
-    ColorStateList getHyperlinkColors();
-
-    /**
-     * Sets <b>hashtags</b> color instance.
+     * Sets **hashtags** color instance.
      *
      * @param colors Colors state list instance.
      */
-    void setHashtagColors(@NonNull ColorStateList colors);
-
+    var hashtagColors: ColorStateList
     /**
-     * Sets <b>mentions</b> color instance.
+     * Returns color instance of **mentions**, default is color accent of current app theme.
+     * Will still return corresponding color even when [.isMentionEnabled] ()} is false.
+     */
+    /**
+     * Sets **mentions** color instance.
      *
      * @param colors Colors state list instance.
      */
-    void setMentionColors(@NonNull ColorStateList colors);
-
+    var mentionColors: ColorStateList
     /**
-     * Sets <b>hyperlinks</b> color instance.
+     * Returns color instance of **hyperlinks**, default is color accent of current app theme.
+     * Will still return corresponding color even when [.isHyperlinkEnabled] ()} is false.
+     */
+    /**
+     * Sets **hyperlinks** color instance.
      *
      * @param colors Colors state list instance.
      */
-    void setHyperlinkColors(@NonNull ColorStateList colors);
-
+    var hyperlinkColors: ColorStateList
     /**
-     * Returns color integer of <b>hashtags</b>.
+     * Returns color integer of **hashtags**.
      *
-     * @see #getHashtagColors()
+     * @see .getHashtagColors
      */
-    @ColorInt
-    int getHashtagColor();
-
     /**
-     * Returns color integer of <b>mentions</b>.
-     *
-     * @see #getMentionColors()
-     */
-    @ColorInt
-    int getMentionColor();
-
-    /**
-     * Returns color integer of <b>hyperlinks</b>.
-     *
-     * @see #getHyperlinkColors()
-     */
-    @ColorInt
-    int getHyperlinkColor();
-
-    /**
-     * Sets <b>hashtags</b> color integer.
+     * Sets **hashtags** color integer.
      *
      * @param color Color integer.
-     * @see #setHashtagColors(ColorStateList)
+     * @see .setHashtagColors
      */
-    void setHashtagColor(@ColorInt int color);
-
+    @get:ColorInt
+    var hashtagColor: Int
     /**
-     * Sets <b>mentions</b> color integer.
+     * Returns color integer of **mentions**.
+     *
+     * @see .getMentionColors
+     */
+    /**
+     * Sets **mentions** color integer.
      *
      * @param color Color integer.
-     * @see #setMentionColors(ColorStateList)
+     * @see .setMentionColors
      */
-    void setMentionColor(@ColorInt int color);
-
+    @get:ColorInt
+    var mentionColor: Int
     /**
-     * Sets <b>hyperlinks</b> color integer.
+     * Returns color integer of **hyperlinks**.
+     *
+     * @see .getHyperlinkColors
+     */
+    /**
+     * Sets **hyperlinks** color integer.
      *
      * @param color Color integer.
-     * @see #setHyperlinkColors(ColorStateList)
+     * @see .setHyperlinkColors
      */
-    void setHyperlinkColor(@ColorInt int color);
+    @get:ColorInt
+    var hyperlinkColor: Int
 
     /**
-     * Registers a callback to be invoked when a <b>hashtag</b> is clicked.
+     * Registers a callback to be invoked when a **hashtag** is clicked.
      *
      * @param listener The callback that will run.
      */
-    void setOnHashtagClickListener(@Nullable OnClickListener listener);
+    fun setOnHashtagClickListener(listener: OnClickListener?)
 
     /**
-     * Registers a callback to be invoked when a <b>mention</b> is clicked.
+     * Registers a callback to be invoked when a **mention** is clicked.
      *
      * @param listener The callback that will run.
      */
-    void setOnMentionClickListener(@Nullable OnClickListener listener);
+    fun setOnMentionClickListener(listener: OnClickListener?)
 
     /**
-     * Registers a callback to be invoked when a <b>hyperlink</b> is clicked.
+     * Registers a callback to be invoked when a **hyperlink** is clicked.
      *
      * @param listener The callback that will run.
      */
-    void setOnHyperlinkClickListener(@Nullable OnClickListener listener);
+    fun setOnHyperlinkClickListener(listener: OnClickListener?)
 
     /**
-     * Registers a text watcher to be invoked when a <b>hashtag</b> is modified.
+     * Registers a text watcher to be invoked when a **hashtag** is modified.
      *
      * @param listener The callback that will run.
      */
-    void setHashtagTextChangedListener(@Nullable OnChangedListener listener);
+    fun setHashtagTextChangedListener(listener: OnChangedListener?)
 
     /**
-     * Registers a text watcher to be invoked when a <b>mention</b> is modified.
+     * Registers a text watcher to be invoked when a **mention** is modified.
      *
      * @param listener The callback that will run.
      */
-    void setMentionTextChangedListener(@Nullable OnChangedListener listener);
+    fun setMentionTextChangedListener(listener: OnChangedListener?)
 
     /**
-     * Returns list of all <b>hashtags</b> found in {@link TextView#getText()}.
+     * Returns list of all **hashtags** found in [TextView.getText].
      */
-    @NonNull
-    List<String> getHashtags();
+    val hashtags: List<String?>
 
     /**
-     * Returns list of all <b>mentions</b> found in {@link TextView#getText()}.
+     * Returns list of all **mentions** found in [TextView.getText].
      */
-    @NonNull
-    List<String> getMentions();
+    val mentions: List<String?>
 
     /**
-     * Returns list of all <b>hyperlinks</b> found in {@link TextView#getText()}.
+     * Returns list of all **hyperlinks** found in [TextView.getText].
      */
-    @NonNull
-    List<String> getHyperlinks();
+    val hyperlinks: List<String?>
 
     /**
-     * Interface definition for a callback to be invoked when a <b>hashtag</b>,
-     * <b>mention</b>, or <b>hyperlink</b> is clicked.
+     * Interface definition for a callback to be invoked when a **hashtag**,
+     * **mention**, or **hyperlink** is clicked.
      */
     interface OnClickListener {
         /**
@@ -251,12 +201,12 @@ public interface SocialView {
          * @param view The view that the texts belong to.
          * @param text The text that was clicked.
          */
-        void onClick(@NonNull SocialView view, @NonNull CharSequence text);
+        fun onClick(view: SocialView, text: CharSequence)
     }
 
     /**
-     * Interface definition for a callback to be invoked when a <b>hashtag</b>,
-     * <b>mention</b>, or <b>hyperlink</b> is modified.
+     * Interface definition for a callback to be invoked when a **hashtag**,
+     * **mention**, or **hyperlink** is modified.
      */
     interface OnChangedListener {
         /**
@@ -265,6 +215,6 @@ public interface SocialView {
          * @param view The view that the texts belong to.
          * @param text The text that was modified.
          */
-        void onChanged(@NonNull SocialView view, @NonNull CharSequence text);
+        fun onChanged(view: SocialView, text: CharSequence)
     }
 }

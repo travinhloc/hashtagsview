@@ -1,306 +1,218 @@
-package com.lt.hastagview.widget;
+package com.lt.hastagview.widget
 
-import android.content.Context;
-import android.content.res.ColorStateList;
-import android.util.AttributeSet;
-
-import androidx.annotation.ColorInt;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.widget.AppCompatTextView;
-
-
-import com.lt.hastagview.internal.SocialViewHelper;
-
-import java.util.List;
-import java.util.regex.Pattern;
+import android.R
+import android.content.Context
+import androidx.appcompat.widget.AppCompatTextView
+import android.content.res.ColorStateList
+import android.util.AttributeSet
+import androidx.annotation.ColorInt
+import com.lt.hastagview.widget.SocialView.OnChangedListener
+import com.lt.hastagview.internal.SocialViewHelper
+import java.util.regex.Pattern
 
 /**
- * {@link android.widget.TextView} with hashtag, mention, and hyperlink support.
+ * [android.widget.TextView] with hashtag, mention, and hyperlink support.
  *
  * @see SocialView
  */
-public class SocialTextView extends AppCompatTextView implements SocialView {
-    private final SocialView helper;
+class SocialTextView @JvmOverloads constructor(
+    context: Context?,
+    attrs: AttributeSet? = null,
+    defStyleAttr: Int = R.attr.textViewStyle
+) : AppCompatTextView(
+    context!!, attrs, defStyleAttr
+), SocialView {
+    private val helper: SocialView
+    /**
+     * {@inheritDoc}
+     */
+    /**
+     * {@inheritDoc}
+     */
+    override var hashtagPattern: Pattern?
+        get() = helper.hashtagPattern
+        set(pattern) {
+            helper.hashtagPattern = pattern
+        }
+    /**
+     * {@inheritDoc}
+     */
+    /**
+     * {@inheritDoc}
+     */
+    override var mentionPattern: Pattern?
+        get() = helper.mentionPattern
+        set(pattern) {
+            helper.mentionPattern = pattern
+        }
+    /**
+     * {@inheritDoc}
+     */
+    /**
+     * {@inheritDoc}
+     */
+    override var hyperlinkPattern: Pattern?
+        get() = helper.hyperlinkPattern
+        set(pattern) {
+            helper.hyperlinkPattern = pattern
+        }
+    /**
+     * {@inheritDoc}
+     */
+    /**
+     * {@inheritDoc}
+     */
+    override var isHashtagEnabled: Boolean
+        get() = helper.isHashtagEnabled
+        set(enabled) {
+            helper.isHashtagEnabled = enabled
+        }
+    /**
+     * {@inheritDoc}
+     */
+    /**
+     * {@inheritDoc}
+     */
+    override var isMentionEnabled: Boolean
+        get() = helper.isMentionEnabled
+        set(enabled) {
+            helper.isMentionEnabled = enabled
+        }
+    /**
+     * {@inheritDoc}
+     */
+    /**
+     * {@inheritDoc}
+     */
+    override var isHyperlinkEnabled: Boolean
+        get() = helper.isHyperlinkEnabled
+        set(enabled) {
+            helper.isHyperlinkEnabled = enabled
+        }
+    /**
+     * {@inheritDoc}
+     */
+    /**
+     * {@inheritDoc}
+     */
+    override var hashtagColors: ColorStateList
+        get() = helper.hashtagColors
+        set(colors) {
+            helper.hashtagColors = colors
+        }
+    /**
+     * {@inheritDoc}
+     */
+    /**
+     * {@inheritDoc}
+     */
+    override var mentionColors: ColorStateList
+        get() = helper.mentionColors
+        set(colors) {
+            helper.mentionColors = colors
+        }
+    /**
+     * {@inheritDoc}
+     */
+    /**
+     * {@inheritDoc}
+     */
+    override var hyperlinkColors: ColorStateList
+        get() = helper.hyperlinkColors
+        set(colors) {
+            helper.hyperlinkColors = colors
+        }
+    /**
+     * {@inheritDoc}
+     */
+    /**
+     * {@inheritDoc}
+     */
+    @get:ColorInt
+    override var hashtagColor: Int
+        get() = helper.hashtagColor
+        set(color) {
+            helper.hashtagColor = color
+        }
+    /**
+     * {@inheritDoc}
+     */
+    /**
+     * {@inheritDoc}
+     */
+    @get:ColorInt
+    override var mentionColor: Int
+        get() = helper.mentionColor
+        set(color) {
+            helper.mentionColor = color
+        }
+    /**
+     * {@inheritDoc}
+     */
+    /**
+     * {@inheritDoc}
+     */
+    @get:ColorInt
+    override var hyperlinkColor: Int
+        get() = helper.hyperlinkColor
+        set(color) {
+            helper.hyperlinkColor = color
+        }
 
-    public SocialTextView(Context context) {
-        this(context, null);
-    }
-
-    public SocialTextView(Context context, AttributeSet attrs) {
-        this(context, attrs, android.R.attr.textViewStyle);
-    }
-
-    public SocialTextView(Context context, AttributeSet attrs, int defStyleAttr) {
-        super(context, attrs, defStyleAttr);
-        helper = SocialViewHelper.install(this, attrs);
+    /**
+     * {@inheritDoc}
+     */
+    override fun setOnHashtagClickListener(listener: SocialView.OnClickListener?) {
+        helper.setOnHashtagClickListener(listener)
     }
 
     /**
      * {@inheritDoc}
      */
-    @NonNull
-    @Override
-    public Pattern getHashtagPattern() {
-        return helper.getHashtagPattern();
+    override fun setOnMentionClickListener(listener: SocialView.OnClickListener?) {
+        helper.setOnMentionClickListener(listener)
     }
 
     /**
      * {@inheritDoc}
      */
-    @NonNull
-    @Override
-    public Pattern getMentionPattern() {
-        return helper.getMentionPattern();
+    override fun setOnHyperlinkClickListener(listener: SocialView.OnClickListener?) {
+        helper.setOnHyperlinkClickListener(listener)
     }
 
     /**
      * {@inheritDoc}
      */
-    @NonNull
-    @Override
-    public Pattern getHyperlinkPattern() {
-        return helper.getHyperlinkPattern();
+    override fun setHashtagTextChangedListener(listener: OnChangedListener?) {
+        helper.setHashtagTextChangedListener(listener)
     }
 
     /**
      * {@inheritDoc}
      */
-    @Override
-    public void setHashtagPattern(@Nullable Pattern pattern) {
-        helper.setHashtagPattern(pattern);
+    override fun setMentionTextChangedListener(listener: OnChangedListener?) {
+        helper.setMentionTextChangedListener(listener)
     }
 
     /**
      * {@inheritDoc}
      */
-    @Override
-    public void setMentionPattern(@Nullable Pattern pattern) {
-        helper.setMentionPattern(pattern);
-    }
+    override val hashtags: List<String?>
+        get() = helper.hashtags
 
     /**
      * {@inheritDoc}
      */
-    @Override
-    public void setHyperlinkPattern(@Nullable Pattern pattern) {
-        helper.setHyperlinkPattern(pattern);
-    }
+    override val mentions: List<String?>
+        get() = helper.mentions
 
     /**
      * {@inheritDoc}
      */
-    @Override
-    public boolean isHashtagEnabled() {
-        return helper.isHashtagEnabled();
-    }
+    override val hyperlinks: List<String?>
+        get() = helper.hyperlinks
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public boolean isMentionEnabled() {
-        return helper.isMentionEnabled();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public boolean isHyperlinkEnabled() {
-        return helper.isHyperlinkEnabled();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void setHashtagEnabled(boolean enabled) {
-        helper.setHashtagEnabled(enabled);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void setMentionEnabled(boolean enabled) {
-        helper.setMentionEnabled(enabled);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void setHyperlinkEnabled(boolean enabled) {
-        helper.setHyperlinkEnabled(enabled);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @NonNull
-    @Override
-    public ColorStateList getHashtagColors() {
-        return helper.getHashtagColors();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @NonNull
-    @Override
-    public ColorStateList getMentionColors() {
-        return helper.getMentionColors();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @NonNull
-    @Override
-    public ColorStateList getHyperlinkColors() {
-        return helper.getHyperlinkColors();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void setHashtagColors(@NonNull ColorStateList colors) {
-        helper.setHashtagColors(colors);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void setMentionColors(@NonNull ColorStateList colors) {
-        helper.setMentionColors(colors);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void setHyperlinkColors(@NonNull ColorStateList colors) {
-        helper.setHyperlinkColors(colors);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @ColorInt
-    @Override
-    public int getHashtagColor() {
-        return helper.getHashtagColor();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @ColorInt
-    @Override
-    public int getMentionColor() {
-        return helper.getMentionColor();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @ColorInt
-    @Override
-    public int getHyperlinkColor() {
-        return helper.getHyperlinkColor();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void setHashtagColor(@ColorInt int color) {
-        helper.setHashtagColor(color);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void setMentionColor(@ColorInt int color) {
-        helper.setMentionColor(color);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void setHyperlinkColor(@ColorInt int color) {
-        helper.setHyperlinkColor(color);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void setOnHashtagClickListener(@Nullable SocialView.OnClickListener listener) {
-        helper.setOnHashtagClickListener(listener);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void setOnMentionClickListener(@Nullable SocialView.OnClickListener listener) {
-        helper.setOnMentionClickListener(listener);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void setOnHyperlinkClickListener(@Nullable SocialView.OnClickListener listener) {
-        helper.setOnHyperlinkClickListener(listener);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void setHashtagTextChangedListener(@Nullable OnChangedListener listener) {
-        helper.setHashtagTextChangedListener(listener);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void setMentionTextChangedListener(@Nullable OnChangedListener listener) {
-        helper.setMentionTextChangedListener(listener);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @NonNull
-    @Override
-    public List<String> getHashtags() {
-        return helper.getHashtags();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @NonNull
-    @Override
-    public List<String> getMentions() {
-        return helper.getMentions();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @NonNull
-    @Override
-    public List<String> getHyperlinks() {
-        return helper.getHyperlinks();
+    init {
+        helper = SocialViewHelper.install(this, attrs)
     }
 }

@@ -12,6 +12,7 @@ import android.widget.ArrayAdapter
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import androidx.recyclerview.widget.RecyclerView
 import com.lt.hastagview.widget.*
 
 //import com.lt.hastagview.widget.Hashtag
@@ -83,9 +84,22 @@ class ExampleActivity : AppCompatActivity() {
 
         textView.hashtagAdapter = defaultHashtagAdapter
         textView.mentionAdapter = defaultMentionAdapter
-        textView.setHashtagTextChangedListener { _, text -> Log.d("hashtag", text.toString()) }
-        textView.setMentionTextChangedListener { _, text -> Log.d("mention", text.toString()) }
-        textView.setOnHyperlinkClickListener { _, text -> Log.d("hyperlink", text.toString()) }
+        textView.setHashtagTextChangedListener(object : SocialView.OnChangedListener {
+            override fun onChanged(view: SocialView, text: CharSequence) {
+                Log.d("hashtag", text.toString())
+            }
+        })
+        textView.setMentionTextChangedListener(object : SocialView.OnChangedListener {
+            override fun onChanged(view: SocialView, text: CharSequence) {
+                Log.d("mention", text.toString())
+            }
+        })
+        textView.setOnHyperlinkClickListener(object : SocialView.OnClickListener {
+            override fun onClick(view: SocialView, text: CharSequence) {
+                Log.d("hyperlink", text.toString())
+            }
+
+        })
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -119,21 +133,21 @@ class ExampleActivity : AppCompatActivity() {
         SocialArrayAdapter<Person>(context, R.layout.item_person, R.id.textViewName) {
 
         override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
-            val holder: ViewHolder
+            val holder: PersonViewHolder
             var view = convertView
             when (view) {
                 null -> {
                     view = LayoutInflater.from(context).inflate(R.layout.item_person, parent, false)
-                    holder = ViewHolder(view!!)
+                    holder = PersonViewHolder(view!!)
                     view.tag = holder
                 }
-                else -> holder = view.tag as ViewHolder
+                else -> holder = view.tag as PersonViewHolder
             }
             getItem(position)?.let { model -> holder.textView.text = model.name }
             return view
         }
 
-        private class ViewHolder(view: View) {
+        private class PersonViewHolder(view: View) {
             val textView: TextView = view.findViewById(R.id.textViewName)
         }
     }
