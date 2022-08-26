@@ -1,28 +1,21 @@
-package com.lt.hastagview.widget;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
+package com.lt.hastagview.widget
 
 /**
- * Abstract mention to be used with {@link com.hendraanggrian.appcompat.widget.MentionArrayAdapter}.
+ * Abstract mention to be used with [com.lt.hastagview.widget.MentionArrayAdapter].
  */
-public interface Mentionable {
-
+interface Mentionable {
     /**
      * Unique id of this mention.
      */
-    @NonNull
-    CharSequence getUsername();
+    val username: CharSequence
 
     /**
      * Optional display name, located above username.
      */
-    @Nullable
-    CharSequence getDisplayname();
+    val displayname: CharSequence?
 
     /**
      * Optional avatar, may be Drawable, resources, or string url pointing to image.
      */
-    @Nullable
-    Object getAvatar();
+    val avatar: Any?
 }

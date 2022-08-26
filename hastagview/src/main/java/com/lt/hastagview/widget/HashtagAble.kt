@@ -1,20 +1,16 @@
-package com.lt.hastagview.widget;
-
-import androidx.annotation.NonNull;
+package com.lt.hastagview.widget
 
 /**
- * Abstract hashtag to be used with {@link com.hendraanggrian.appcompat.widget.HashtagArrayAdapter}.
+ * Abstract hashtag to be used with [com.lt.hastagview.widget.HashtagArrayAdapter].
  */
-public interface Hashtagable {
-
+interface HashtagAble {
     /**
      * Unique id of this hashtag.
      */
-    @NonNull
-    CharSequence getId();
+    val id: CharSequence
 
     /**
      * Optional count, located right to hashtag name.
      */
-    int getCount();
+    val count: Int
 }

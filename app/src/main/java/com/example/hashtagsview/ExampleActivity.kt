@@ -14,11 +14,11 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import com.lt.hastagview.widget.*
 
-//import com.hendraanggrian.appcompat.widget.Hashtag
-//import com.hendraanggrian.appcompat.widget.HashtagArrayAdapter
-//import com.hendraanggrian.appcompat.widget.Mention
-//import com.hendraanggrian.appcompat.widget.MentionArrayAdapter
-//import com.hendraanggrian.appcompat.widget.SocialArrayAdapter
+//import com.lt.hastagview.widget.Hashtag
+//import com.lt.hastagview.widget.HashtagArrayAdapter
+//import com.lt.hastagview.widget.Mention
+//import com.lt.hastagview.widget.MentionArrayAdapter
+//import com.lt.hastagview.widget.SocialArrayAdapter
 
 class ExampleActivity : AppCompatActivity() {
 
@@ -30,7 +30,7 @@ class ExampleActivity : AppCompatActivity() {
         const val HASHTAG3_COUNT = 500
         const val MENTION1_USERNAME = "dirtyhobo"
         const val MENTION2_USERNAME = "hobo"
-        const val MENTION3_USERNAME = "hendraanggrian"
+        const val MENTION3_USERNAME = "lock lock"
         const val MENTION2_DISPLAYNAME = "Regular Hobo"
         const val MENTION3_DISPLAYNAME = "Hendra Anggrian"
     }

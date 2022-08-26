@@ -18,7 +18,7 @@ import com.lt.hastagview.R;
  * Note that this adapter is completely optional, any adapter extending
  * {@link android.widget.ArrayAdapter} can be attached to {@link SocialAutoCompleteTextView}.
  */
-public class HashtagArrayAdapter<T extends Hashtagable> extends SocialArrayAdapter<T> {
+public class HashtagArrayAdapter<T extends HashtagAble> extends SocialArrayAdapter<T> {
     private final int countPluralRes;
 
     public HashtagArrayAdapter(@NonNull Context context) {

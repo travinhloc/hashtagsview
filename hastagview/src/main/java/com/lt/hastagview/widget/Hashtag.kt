@@ -1,13 +1,11 @@
 package com.lt.hastagview.widget
 
-import com.lt.hastagview.widget.Hashtagable
-import com.lt.hastagview.widget.Hashtag
+class Hashtag(id: CharSequence, count: Int = -1): HashtagAble {
+    override val id: CharSequence
+        get() = this.id
+    override val count: Int
+        get() =this.count
 
-/**
- * Simple optional hashtag data class, use when there is no custom hashtag class.
- */
-class Hashtag @JvmOverloads constructor(private val id: CharSequence, private val count: Int = -1) :
-    Hashtagable {
     override fun equals(obj: Any?): Boolean {
         return obj is Hashtag && obj.id === id
     }
@@ -20,17 +18,4 @@ class Hashtag @JvmOverloads constructor(private val id: CharSequence, private va
         return id.toString()
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    override fun getId(): CharSequence {
-        return id
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    override fun getCount(): Int {
-        return count
-    }
 }
