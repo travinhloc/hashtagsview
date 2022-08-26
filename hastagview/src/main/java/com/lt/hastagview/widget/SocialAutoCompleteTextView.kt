@@ -1,371 +1,243 @@
-package com.lt.hastagview.widget;
+package com.lt.hastagview.widget
 
-import android.content.Context;
-import android.content.res.ColorStateList;
-import android.text.Editable;
-import android.text.Spannable;
-import android.text.SpannableString;
-import android.text.Spanned;
-import android.text.TextUtils;
-import android.text.TextWatcher;
-import android.util.AttributeSet;
-import android.widget.ArrayAdapter;
+import android.content.Context
 
-import androidx.annotation.ColorInt;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.widget.AppCompatMultiAutoCompleteTextView;
-
-import com.lt.hastagview.internal.SocialViewHelper;
-
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.regex.Pattern;
+import androidx.appcompat.widget.AppCompatMultiAutoCompleteTextView
+import android.widget.ArrayAdapter
+import android.content.res.ColorStateList
+import android.text.*
+import androidx.annotation.ColorInt
+import com.lt.hastagview.widget.SocialView.OnChangedListener
+import android.util.AttributeSet
+import androidx.appcompat.R
+import com.lt.hastagview.internal.SocialViewHelper
+import java.util.ArrayList
+import java.util.regex.Pattern
 
 /**
- * {@link android.widget.MultiAutoCompleteTextView} with hashtag, mention, and hyperlink support.
+ * [android.widget.MultiAutoCompleteTextView] with hashtag, mention, and hyperlink support.
  *
  * @see SocialView
  */
-public class SocialAutoCompleteTextView extends AppCompatMultiAutoCompleteTextView implements SocialView {
-    private final SocialView helper;
+class SocialAutoCompleteTextView @JvmOverloads constructor(
+    context: Context?,
+    attrs: AttributeSet? = null,
+    defStyleAttr: Int = R.attr.autoCompleteTextViewStyle
+) : AppCompatMultiAutoCompleteTextView(
+    context!!, attrs, defStyleAttr
+), SocialView {
+    private val helper: SocialView
 
     // TODO: should check for symbols closest to cursor, not s[start]
-    @SuppressWarnings("FieldCanBeLocal")
-    private final TextWatcher textWatcher = new TextWatcher() {
-        @Override
-        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-        }
-
-        @Override
-        public void onTextChanged(CharSequence s, int start, int before, int count) {
-            if (!TextUtils.isEmpty(s) && start < s.length()) {
-                switch (s.charAt(start)) {
-                    case '#':
-                        if (getAdapter() != hashtagAdapter) {
-                            setAdapter(hashtagAdapter);
-                        }
-                        break;
-                    case '@':
-                        if (getAdapter() != mentionAdapter) {
-                            setAdapter(mentionAdapter);
-                        }
-                        break;
+    private val textWatcher: TextWatcher = object : TextWatcher {
+        override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
+        override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
+            if (!TextUtils.isEmpty(s) && start < s.length) {
+                when (s[start]) {
+                    '#' -> if (adapter !== hashtagAdapter) {
+                        setAdapter(hashtagAdapter)
+                    }
+                    '@' -> if (adapter !== mentionAdapter) {
+                        setAdapter(mentionAdapter)
+                    }
                 }
             }
         }
 
-        @Override
-        public void afterTextChanged(Editable s) {
+        override fun afterTextChanged(s: Editable) {}
+    }
+    var hashtagAdapter: ArrayAdapter<*>? = null
+    var mentionAdapter: ArrayAdapter<*>? = null
+    /**
+     * {@inheritDoc}
+     */
+    /**
+     * {@inheritDoc}
+     */
+    override var hashtagPattern: Pattern?
+        get() = helper.hashtagPattern
+        set(pattern) {
+            helper.hashtagPattern = pattern
         }
-    };
+    /**
+     * {@inheritDoc}
+     */
+    /**
+     * {@inheritDoc}
+     */
+    override var mentionPattern: Pattern?
+        get() = helper.mentionPattern
+        set(pattern) {
+            helper.mentionPattern = pattern
+        }
+    /**
+     * {@inheritDoc}
+     */
+    /**
+     * {@inheritDoc}
+     */
+    override var hyperlinkPattern: Pattern?
+        get() = helper.hyperlinkPattern
+        set(pattern) {
+            helper.hyperlinkPattern = pattern
+        }
+    /**
+     * {@inheritDoc}
+     */
+    /**
+     * {@inheritDoc}
+     */
+    override var isHashtagEnabled: Boolean
+        get() = helper.isHashtagEnabled
+        set(enabled) {
+            helper.isHashtagEnabled = enabled
+            setTokenizer(CharTokenizer())
+        }
+    /**
+     * {@inheritDoc}
+     */
+    /**
+     * {@inheritDoc}
+     */
+    override var isMentionEnabled: Boolean
+        get() = helper.isMentionEnabled
+        set(enabled) {
+            helper.isMentionEnabled = enabled
+            setTokenizer(CharTokenizer())
+        }
+    /**
+     * {@inheritDoc}
+     */
+    /**
+     * {@inheritDoc}
+     */
+    override var isHyperlinkEnabled: Boolean
+        get() = helper.isHyperlinkEnabled
+        set(enabled) {
+            helper.isHyperlinkEnabled = enabled
+        }
+    /**
+     * {@inheritDoc}
+     */
+    /**
+     * {@inheritDoc}
+     */
+    override var hashtagColors: ColorStateList
+        get() = helper.hashtagColors
+        set(colors) {
+            helper.hashtagColors = colors
+        }
+    /**
+     * {@inheritDoc}
+     */
+    /**
+     * {@inheritDoc}
+     */
+    override var mentionColors: ColorStateList
+        get() = helper.mentionColors
+        set(colors) {
+            helper.mentionColors = colors
+        }
+    /**
+     * {@inheritDoc}
+     */
+    /**
+     * {@inheritDoc}
+     */
+    override var hyperlinkColors: ColorStateList
+        get() = helper.hyperlinkColors
+        set(colors) {
+            helper.hyperlinkColors = colors
+        }
+    /**
+     * {@inheritDoc}
+     */
+    /**
+     * {@inheritDoc}
+     */
+    @get:ColorInt
+    override var hashtagColor: Int
+        get() = helper.hashtagColor
+        set(color) {
+            helper.hashtagColor = color
+        }
+    /**
+     * {@inheritDoc}
+     */
+    /**
+     * {@inheritDoc}
+     */
+    @get:ColorInt
+    override var mentionColor: Int
+        get() = helper.mentionColor
+        set(color) {
+            helper.mentionColor = color
+        }
+    /**
+     * {@inheritDoc}
+     */
+    /**
+     * {@inheritDoc}
+     */
+    @get:ColorInt
+    override var hyperlinkColor: Int
+        get() = helper.hyperlinkColor
+        set(color) {
+            helper.hyperlinkColor = color
+        }
 
-    private ArrayAdapter<?> hashtagAdapter;
-    private ArrayAdapter<?> mentionAdapter;
-
-    public SocialAutoCompleteTextView(Context context) {
-        this(context, null);
-    }
-
-    public SocialAutoCompleteTextView(Context context, AttributeSet attrs) {
-        this(context, attrs, androidx.appcompat.R.attr.autoCompleteTextViewStyle);
-    }
-
-    public SocialAutoCompleteTextView(Context context, AttributeSet attrs, int defStyleAttr) {
-        super(context, attrs, defStyleAttr);
-        helper = SocialViewHelper.install(this, attrs);
-        addTextChangedListener(textWatcher);
-        setTokenizer(new CharTokenizer());
-    }
-
-    @Nullable
-    public ArrayAdapter<?> getHashtagAdapter() {
-        return hashtagAdapter;
-    }
-
-    public void setHashtagAdapter(@Nullable ArrayAdapter<?> adapter) {
-        hashtagAdapter = adapter;
-    }
-
-    @Nullable
-    public ArrayAdapter<?> getMentionAdapter() {
-        return mentionAdapter;
-    }
-
-    public void setMentionAdapter(@Nullable ArrayAdapter<?> adapter) {
-        mentionAdapter = adapter;
+    /**
+     * {@inheritDoc}
+     */
+    override fun setOnHashtagClickListener(listener: SocialView.OnClickListener?) {
+        helper.setOnHashtagClickListener(listener)
     }
 
     /**
      * {@inheritDoc}
      */
-    @NonNull
-    @Override
-    public Pattern getHashtagPattern() {
-        return helper.getHashtagPattern();
+    override fun setOnMentionClickListener(listener: SocialView.OnClickListener?) {
+        helper.setOnMentionClickListener(listener)
     }
 
     /**
      * {@inheritDoc}
      */
-    @NonNull
-    @Override
-    public Pattern getMentionPattern() {
-        return helper.getMentionPattern();
+    override fun setOnHyperlinkClickListener(listener: SocialView.OnClickListener?) {
+        helper.setOnHyperlinkClickListener(listener)
     }
 
     /**
      * {@inheritDoc}
      */
-    @NonNull
-    @Override
-    public Pattern getHyperlinkPattern() {
-        return helper.getHyperlinkPattern();
+    override fun setHashtagTextChangedListener(listener: OnChangedListener?) {
+        helper.setHashtagTextChangedListener(listener)
     }
 
     /**
      * {@inheritDoc}
      */
-    @Override
-    public void setHashtagPattern(@Nullable Pattern pattern) {
-        helper.setHashtagPattern(pattern);
+    override fun setMentionTextChangedListener(listener: OnChangedListener?) {
+        helper.setMentionTextChangedListener(listener)
     }
 
     /**
      * {@inheritDoc}
      */
-    @Override
-    public void setMentionPattern(@Nullable Pattern pattern) {
-        helper.setMentionPattern(pattern);
-    }
+    override val hashtags: List<String?>
+        get() = helper.hashtags
 
     /**
      * {@inheritDoc}
      */
-    @Override
-    public void setHyperlinkPattern(@Nullable Pattern pattern) {
-        helper.setHyperlinkPattern(pattern);
-    }
+    override val mentions: List<String?>
+        get() = helper.mentions
 
     /**
      * {@inheritDoc}
      */
-    @Override
-    public boolean isHashtagEnabled() {
-        return helper.isHashtagEnabled();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public boolean isMentionEnabled() {
-        return helper.isMentionEnabled();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public boolean isHyperlinkEnabled() {
-        return helper.isHyperlinkEnabled();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void setHashtagEnabled(boolean enabled) {
-        helper.setHashtagEnabled(enabled);
-        setTokenizer(new CharTokenizer());
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void setMentionEnabled(boolean enabled) {
-        helper.setMentionEnabled(enabled);
-        setTokenizer(new CharTokenizer());
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void setHyperlinkEnabled(boolean enabled) {
-        helper.setHyperlinkEnabled(enabled);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @NonNull
-    @Override
-    public ColorStateList getHashtagColors() {
-        return helper.getHashtagColors();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @NonNull
-    @Override
-    public ColorStateList getMentionColors() {
-        return helper.getMentionColors();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @NonNull
-    @Override
-    public ColorStateList getHyperlinkColors() {
-        return helper.getHyperlinkColors();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void setHashtagColors(@NonNull ColorStateList colors) {
-        helper.setHashtagColors(colors);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void setMentionColors(@NonNull ColorStateList colors) {
-        helper.setMentionColors(colors);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void setHyperlinkColors(@NonNull ColorStateList colors) {
-        helper.setHyperlinkColors(colors);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @ColorInt
-    @Override
-    public int getHashtagColor() {
-        return helper.getHashtagColor();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @ColorInt
-    @Override
-    public int getMentionColor() {
-        return helper.getMentionColor();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @ColorInt
-    @Override
-    public int getHyperlinkColor() {
-        return helper.getHyperlinkColor();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void setHashtagColor(@ColorInt int color) {
-        helper.setHashtagColor(color);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void setMentionColor(@ColorInt int color) {
-        helper.setMentionColor(color);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void setHyperlinkColor(@ColorInt int color) {
-        helper.setHyperlinkColor(color);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void setOnHashtagClickListener(@Nullable SocialView.OnClickListener listener) {
-        helper.setOnHashtagClickListener(listener);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void setOnMentionClickListener(@Nullable SocialView.OnClickListener listener) {
-        helper.setOnMentionClickListener(listener);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void setOnHyperlinkClickListener(@Nullable SocialView.OnClickListener listener) {
-        helper.setOnHyperlinkClickListener(listener);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void setHashtagTextChangedListener(@Nullable OnChangedListener listener) {
-        helper.setHashtagTextChangedListener(listener);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void setMentionTextChangedListener(@Nullable OnChangedListener listener) {
-        helper.setMentionTextChangedListener(listener);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @NonNull
-    @Override
-    public List<String> getHashtags() {
-        return helper.getHashtags();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @NonNull
-    @Override
-    public List<String> getMentions() {
-        return helper.getMentions();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @NonNull
-    @Override
-    public List<String> getHyperlinks() {
-        return helper.getHyperlinks();
-    }
+    override val hyperlinks: List<String?>
+        get() = helper.hyperlinks
 
     /**
      * While `CommaTokenizer` tracks only comma symbol,
@@ -373,71 +245,75 @@ public class SocialAutoCompleteTextView extends AppCompatMultiAutoCompleteTextVi
      *
      * @see CommaTokenizer
      */
-    private class CharTokenizer implements Tokenizer {
-        private final Collection<Character> chars = new ArrayList<>();
-
-        CharTokenizer() {
-            if (isHashtagEnabled()) {
-                chars.add('#');
+    private inner class CharTokenizer internal constructor() : Tokenizer {
+        private val chars: MutableCollection<Char> = ArrayList()
+        override fun findTokenStart(text: CharSequence, cursor: Int): Int {
+            var i = cursor
+            while (i > 0 && !chars.contains(text[i - 1])) {
+                i--
             }
-            if (isMentionEnabled()) {
-                chars.add('@');
-            }
-        }
-
-        @Override
-        public int findTokenStart(CharSequence text, int cursor) {
-            int i = cursor;
-
-            while (i > 0 && !chars.contains(text.charAt(i - 1))) {
-                i--;
-            }
-            while (i < cursor && text.charAt(i) == ' ') {
-                i++;
+            while (i < cursor && text[i] == ' ') {
+                i++
             }
 
             // imperfect fix for dropdown still showing without symbol found
-            if (i == 0 && isPopupShowing()) {
-                dismissDropDown();
+            if (i == 0 && isPopupShowing) {
+                dismissDropDown()
             }
-            return i;
+            return i
         }
 
-        @Override
-        public int findTokenEnd(CharSequence text, int cursor) {
-            int i = cursor;
-            int len = text.length();
-
+        override fun findTokenEnd(text: CharSequence, cursor: Int): Int {
+            var i = cursor
+            val len = text.length
             while (i < len) {
-                if (chars.contains(text.charAt(i))) {
-                    return i;
+                if (chars.contains(text[i])) {
+                    return i
                 } else {
-                    i++;
+                    i++
                 }
             }
-
-            return len;
+            return len
         }
 
-        @Override
-        public CharSequence terminateToken(CharSequence text) {
-            int i = text.length();
-
-            while (i > 0 && text.charAt(i - 1) == ' ') {
-                i--;
+        override fun terminateToken(text: CharSequence): CharSequence {
+            var i = text.length
+            while (i > 0 && text[i - 1] == ' ') {
+                i--
             }
-
-            if (i > 0 && chars.contains(text.charAt(i - 1))) {
-                return text;
+            return if (i > 0 && chars.contains(text[i - 1])) {
+                text
             } else {
-                if (text instanceof Spanned) {
-                    final Spannable sp = new SpannableString(text + " ");
-                    TextUtils.copySpansFrom((Spanned) text, 0, text.length(), Object.class, sp, 0);
-                    return sp;
+                if (text is Spanned) {
+                    val sp: Spannable = SpannableString("$text ")
+                    TextUtils.copySpansFrom(
+                        text,
+                        0,
+                        text.length,
+                        Any::class.java,
+                        sp,
+                        0
+                    )
+                    sp
                 } else {
-                    return text + " ";
+                    "$text "
                 }
             }
         }
+
+        init {
+            if (isHashtagEnabled) {
+                chars.add('#')
+            }
+            if (isMentionEnabled) {
+                chars.add('@')
+            }
+        }
+    }
+
+    init {
+        helper = SocialViewHelper.install(this, attrs)
+        addTextChangedListener(textWatcher)
+        setTokenizer(CharTokenizer())
     }
 }
