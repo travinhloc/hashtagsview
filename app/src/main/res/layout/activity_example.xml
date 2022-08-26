@@ -22,7 +22,13 @@
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
         android:completionThreshold="0"
+        app:hashtagColor="#1240C0"
+        app:mentionColor="#1240C0"
+        app:hyperlinkColor="#1240C0"
+
+        android:background="@null"
         android:hint="What's on your mind?"
+
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
 

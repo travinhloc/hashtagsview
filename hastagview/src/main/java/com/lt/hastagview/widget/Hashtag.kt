@@ -1,11 +1,18 @@
 package com.lt.hastagview.widget
 
-class Hashtag(id: CharSequence, count: Int = -1): HashtagAble {
-    override val id: CharSequence
-        get() = this.id
-    override val count: Int
-        get() =this.count
-
+class Hashtag @JvmOverloads constructor(
+    /**
+     * {@inheritDoc}
+     */
+    override val id: CharSequence,
+    /**
+     * {@inheritDoc}
+     */
+    override val count: Int = -1,
+    /**
+     * {@inheritDoc}
+     */
+) : HashtagAble {
     override fun equals(obj: Any?): Boolean {
         return obj is Hashtag && obj.id === id
     }
@@ -17,5 +24,4 @@ class Hashtag(id: CharSequence, count: Int = -1): HashtagAble {
     override fun toString(): String {
         return id.toString()
     }
-
 }
